@@ -15,6 +15,7 @@ import java.util.Map;
 public class CountryCodeConverter {
 
     private Map<String, String> codeMap = new HashMap<String, String>();
+    public Map<String, String> codeAndNumMap = new HashMap<String, String>();
 
     /**
      * Default constructor which will load the country codes from "country-codes.txt"
@@ -36,8 +37,12 @@ public class CountryCodeConverter {
                     .getClassLoader().getResource(filename).toURI()));
 
             for (String s: lines) {
+                if ("Country\tAlpha-2 code\tAlpha-3 code\tNumeric".equals(s)) {
+                    continue;
+                }
                 String[] splitUpS = s.split("\t");
                 this.codeMap.put(splitUpS[2], splitUpS[0]);
+                this.codeAndNumMap.put(splitUpS[2], splitUpS[3]);
             }
         }
         catch (IOException | URISyntaxException ex) {
@@ -75,6 +80,6 @@ public class CountryCodeConverter {
      * @return how many countries are included in this code converter.
      */
     public int getNumCountries() {
-        return this.codeMap.size() - 1;
+        return this.codeMap.size();
     }
 }
