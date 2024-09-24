@@ -17,6 +17,7 @@ import org.json.JSONArray;
 public class JSONTranslator implements Translator {
 
     private final JSONArray jsonArray;
+    private final String alpha3Str = "alpha3";
 
     /**
      * Constructs a JSONTranslator using data from the sample.json resources file.
@@ -47,10 +48,11 @@ public class JSONTranslator implements Translator {
     public List<String> getCountryLanguages(String country) {
         List<String> availableLangs = new ArrayList<>();
         for (int i = 0; i < this.jsonArray.length(); i++) {
-            if (country.equals(this.jsonArray.getJSONObject(i).get("alpha3"))) {
+            if (country.equals(this.jsonArray.getJSONObject(i).get(this.alpha3Str))) {
                 for (Map.Entry<String, Object> s: this.jsonArray.getJSONObject(i).toMap().entrySet()) {
                     String keyValue = s.getKey();
-                    if (!("id".equals(keyValue)) && !("alpha2".equals(keyValue)) && !("alpha3".equals(keyValue))) {
+                    if (!("id".equals(keyValue)) && !("alpha2".equals(keyValue))
+                            && !(this.alpha3Str).equals(keyValue)) {
                         availableLangs.add(keyValue);
                     }
                 }
@@ -63,7 +65,7 @@ public class JSONTranslator implements Translator {
     public List<String> getCountries() {
         List<String> countryList = new ArrayList<>();
         for (int i = 0; i < this.jsonArray.length(); i++) {
-            countryList.add((String) this.jsonArray.getJSONObject(i).get("alpha3"));
+            countryList.add((String) this.jsonArray.getJSONObject(i).get(this.alpha3Str));
         }
         return countryList;
     }
@@ -71,7 +73,7 @@ public class JSONTranslator implements Translator {
     @Override
     public String translate(String country, String language) {
         for (int i = 0; i < this.jsonArray.length(); i++) {
-            if (country.equals(this.jsonArray.getJSONObject(i).get("alpha3"))) {
+            if (country.equals(this.jsonArray.getJSONObject(i).get(this.alpha3Str))) {
                 return (String) this.jsonArray.getJSONObject(i).get(language);
             }
         }
