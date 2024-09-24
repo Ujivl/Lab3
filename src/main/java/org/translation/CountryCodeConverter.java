@@ -40,7 +40,7 @@ public class CountryCodeConverter {
                     continue;
                 }
                 String[] splitUpS = s.split("\t");
-                this.codeMap.put(splitUpS[2], splitUpS[0]);
+                this.codeMap.put(splitUpS[2].toLowerCase(), splitUpS[0]);
             }
         }
         catch (IOException | URISyntaxException ex) {
@@ -55,7 +55,7 @@ public class CountryCodeConverter {
      * @return the name of the country corresponding to the code
      */
     public String fromCountryCode(String code) {
-        return this.codeMap.get(code.toUpperCase());
+        return this.codeMap.get(code);
     }
 
     /**
