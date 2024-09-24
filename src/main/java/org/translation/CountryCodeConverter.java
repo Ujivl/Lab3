@@ -15,7 +15,6 @@ import java.util.Map;
 public class CountryCodeConverter {
 
     private Map<String, String> codeMap = new HashMap<String, String>();
-    public Map<String, String> codeAndNumMap = new HashMap<String, String>();
 
     /**
      * Default constructor which will load the country codes from "country-codes.txt"
@@ -42,7 +41,6 @@ public class CountryCodeConverter {
                 }
                 String[] splitUpS = s.split("\t");
                 this.codeMap.put(splitUpS[2], splitUpS[0]);
-                this.codeAndNumMap.put(splitUpS[2], splitUpS[3]);
             }
         }
         catch (IOException | URISyntaxException ex) {

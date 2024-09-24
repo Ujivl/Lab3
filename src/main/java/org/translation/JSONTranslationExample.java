@@ -15,7 +15,6 @@ public class JSONTranslationExample {
 
     public static final int CANADA_INDEX = 30;
     private final JSONArray jsonArray;
-    private final CountryCodeConverter countryConverterObj = new CountryCodeConverter();
 
     // Note: CheckStyle is configured so that we are allowed to omit javadoc for constructors
     public JSONTranslationExample() {
